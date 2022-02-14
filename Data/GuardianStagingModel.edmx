@@ -1,0 +1,1362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GuardianStagingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActivityGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="DefaultFlag" Type="bit" />
+          <Property Name="DataExtractFlag" Type="bit" />
+          <Property Name="UpdatedById" Type="bigint" />
+          <Property Name="UpdatedByExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="ExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ApplicationUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Role" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Assets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="AssetNumber" Type="varchar" MaxLength="100" />
+          <Property Name="SerialNumber" Type="varchar" MaxLength="100" />
+          <Property Name="AssetClass" Type="varchar" MaxLength="100" />
+          <Property Name="PropertyId" Type="bigint" />
+          <Property Name="MakeId" Type="bigint" />
+          <Property Name="ModelId" Type="bigint" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="RequestId" Type="bigint" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="UpdatedById" Type="bigint" />
+          <Property Name="UpdatedByExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="AttachmentTypeId" Type="bigint" />
+          <Property Name="RequestExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="Contents" Type="varchar" MaxLength="100" />
+          <Property Name="IsSignature" Type="bit" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BillCodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="UpdatedById" Type="bigint" />
+          <Property Name="UpdatedByExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="BillTypeId" Type="bigint" Nullable="false" />
+          <Property Name="GlIncomeAccount" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Region" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GuardianVM">
+          <Key>
+            <PropertyRef Name="EntityID" />
+          </Key>
+          <Property Name="EntityID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime2" Precision="7" />
+          <Property Name="InvoiceNo" Type="bigint" Nullable="false" />
+          <Property Name="InvoiceBallance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Custumer" Type="nvarchar(max)" />
+          <Property Name="Property" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="AECode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LaborCosts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="EmployeeId" Type="bigint" />
+          <Property Name="ExternalEmployeeId" Type="varchar" MaxLength="100" />
+          <Property Name="TimeStarted" Type="datetime" />
+          <Property Name="TimeFinished" Type="datetime" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="Hours" Type="int" />
+          <Property Name="RateTypeId" Type="bigint" />
+          <Property Name="RequestTypeActivityId" Type="bigint" />
+          <Property Name="ExternalRequestTypeActivityId" Type="varchar" MaxLength="100" />
+          <Property Name="ApInvoiceNumber" Type="varchar" MaxLength="100" />
+          <Property Name="ApAccountNumber" Type="varchar" MaxLength="100" />
+          <Property Name="LienWaiverAmount" Type="int" />
+          <Property Name="LienWaiverComments" Type="varchar" MaxLength="100" />
+          <Property Name="PaymentComments" Type="varchar" MaxLength="100" />
+          <Property Name="ApInvoiceAmount" Type="int" />
+          <Property Name="ApPostDate" Type="datetime" />
+          <Property Name="ApDueDate" Type="datetime" />
+          <Property Name="ApTaxAmount" Type="int" />
+          <Property Name="ApShippingHandlingAmount" Type="int" />
+          <Property Name="ApInvoiceStatusId" Type="bigint" />
+          <Property Name="ApInvoiceDate" Type="datetime" />
+          <Property Name="CoaAccountId" Type="bigint" />
+          <Property Name="Payee" Type="varchar" MaxLength="100" />
+          <Property Name="TaxAmount" Type="int" />
+          <Property Name="BudgetYear" Type="int" />
+          <Property Name="VendorCode" Type="varchar" MaxLength="100" />
+          <Property Name="VendorCompanyExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="CrewId" Type="bigint" />
+          <Property Name="InstallId" Type="bigint" />
+          <Property Name="RequestId" Type="bigint" />
+          <Property Name="RequestExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="VendorCompanyId" Type="bigint" />
+          <Property Name="TotalAmount" Type="int" />
+          <Property Name="MarkupFlag" Type="bit" />
+          <Property Name="TotalMarkup" Type="int" />
+          <Property Name="AccountId" Type="bigint" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="RecurrenceId" Type="bigint" />
+          <Property Name="UpdatedById" Type="bigint" />
+          <Property Name="AccountsPayableFlag" Type="bit" />
+          <Property Name="ApExportFlag" Type="bit" />
+          <Property Name="TaxableFlag" Type="bit" />
+          <Property Name="CurrencySign" Type="varchar" MaxLength="100" />
+          <Property Name="LineItemNumber" Type="int" />
+          <Property Name="ExternalId" Type="bigint" />
+          <Property Name="TaxRate" Type="int" />
+          <Property Name="ExternalUpdatedById" Type="varchar" MaxLength="100" />
+          <Property Name="ExternalRecurrenceId" Type="varchar" MaxLength="100" />
+          <Property Name="InvoiceNumber" Type="varchar" MaxLength="100" />
+          <Property Name="InvoiceDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LaborRateScheduleBillingRates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="RateScheduleId" Type="bigint" />
+          <Property Name="RequestTypeActivityId" Type="bigint" />
+          <Property Name="EmployeeId" Type="bigint" />
+          <Property Name="HourlyRate" Type="int" />
+          <Property Name="OtHourlyRate" Type="int" />
+          <Property Name="TwoOtHourlyRate" Type="int" />
+          <Property Name="PositionId" Type="bigint" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LaborRateSchedules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="RateDescription" Type="varchar" MaxLength="100" />
+          <Property Name="TabOrder" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OtherCosts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="OtherCostTypeId" Type="bigint" />
+          <Property Name="OtherCostType" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PriorityTypeSlaDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="RequestPriorityId" Type="bigint" />
+          <Property Name="RequestTypeId" Type="bigint" />
+          <Property Name="DefaultFollowupAlert" Type="int" />
+          <Property Name="EscalateToId" Type="bigint" />
+          <Property Name="DefaultSlaResponseTime" Type="int" />
+          <Property Name="DefaultSlaCompletionTime" Type="int" />
+          <Property Name="SlaOverdueAlert" Type="int" />
+          <Property Name="SlaEscalateToId" Type="bigint" />
+          <Property Name="SlaSendNotificationsFlag" Type="bit" />
+          <Property Name="UpdatedById" Type="bigint" />
+          <Property Name="Sla247OverrideFlag" Type="bit" />
+          <Property Name="RequestSubTypeId" Type="bigint" />
+          <Property Name="DefaultPriorityFlag" Type="bit" />
+          <Property Name="SlaCompletionInHours" Type="bit" />
+          <Property Name="SlaResponseInHours" Type="bit" />
+          <Property Name="UpdatedByExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Properties">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="CompanyId" Type="bigint" />
+          <Property Name="ParentId" Type="bigint" />
+          <Property Name="Region" Type="varchar" MaxLength="100" />
+          <Property Name="DefaultContact" Type="varchar" MaxLength="100" />
+          <Property Name="DefaultServiceContract" Type="varchar" MaxLength="100" />
+          <Property Name="ExternalPropertyId" Type="bigint" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RegionRegionAssociations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="ParentId" Type="bigint" />
+          <Property Name="ParentExternalId" Type="bigint" />
+          <Property Name="ChildId" Type="bigint" />
+          <Property Name="ChildExternalId" Type="bigint" />
+          <Property Name="UpdatedById" Type="bigint" />
+          <Property Name="UpdatedByExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="CompanyId" Type="bigint" />
+          <Property Name="ParentId" Type="bigint" />
+          <Property Name="ParentFlag" Type="bit" />
+          <Property Name="Sqft" Type="int" />
+          <Property Name="ExternalId" Type="bigint" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="Type" Type="varchar" MaxLength="100" />
+          <Property Name="CompanyExternalId" Type="bigint" />
+          <Property Name="ParentExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Schedules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="ExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="AssetId" Type="bigint" />
+          <Property Name="PropertyId" Type="bigint" />
+          <Property Name="RequestTypeId" Type="bigint" />
+          <Property Name="RequestSubTypeId" Type="bigint" />
+          <Property Name="ScheduleName" Type="varchar" MaxLength="100" />
+          <Property Name="RecurrencePatternDesc" Type="varchar" MaxLength="100" />
+          <Property Name="AssignedToId" Type="bigint" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ServiceTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Spaces">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="RateScheduleId" Type="bigint" />
+          <Property Name="PropertyId" Type="bigint" />
+          <Property Name="ExternalFloorId" Type="bigint" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="PropertyExternalId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserApiModels">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="access_token" Type="nvarchar(max)" />
+          <Property Name="token_type" Type="nvarchar(max)" />
+          <Property Name="expires_in" Type="int" Nullable="false" />
+          <Property Name="refresh_token" Type="nvarchar(max)" />
+          <Property Name="first_name" Type="nvarchar(max)" />
+          <Property Name="last_name" Type="nvarchar(max)" />
+          <Property Name="installation_id" Type="int" Nullable="false" />
+          <Property Name="installation_name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="CompanyId" Type="bigint" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WorkOrderChargeToAccounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="RequestId" Type="varchar" MaxLength="50" />
+          <Property Name="RequestExternalId" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Number" Type="varchar" MaxLength="100" />
+          <Property Name="IsDefault" Type="bit" />
+        </EntityType>
+        <EntityType Name="WorkOrderMaterialCostLineItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="RequestedId" Type="bigint" />
+          <Property Name="ItemName" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
+          <Property Name="ChargeToAccountNumber" Type="varchar" MaxLength="100" />
+          <Property Name="ChargetoAccount" Type="varchar" MaxLength="100" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="UnitCost" Type="int" />
+          <Property Name="TotalCost" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Workorders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="ExternalId" Type="varchar" MaxLength="100" />
+          <Property Name="RequestTypeId" Type="int" />
+          <Property Name="RequestPriorityId" Type="int" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="StatementOfWork" Type="varchar" MaxLength="5000" />
+          <Property Name="AssignedDate" Type="datetime" />
+          <Property Name="ClosedDate" Type="datetime" />
+          <Property Name="ClosedById" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedById" Type="int" />
+          <Property Name="ActualCompletionDate" Type="datetime" />
+          <Property Name="SlaActualResponseDate" Type="datetime" />
+          <Property Name="SlaActualCompletionDate" Type="datetime" />
+          <Property Name="PropertyHoursInDay" Type="int" />
+          <Property Name="ActualCompletionTime" Type="int" />
+          <Property Name="ActualResponseTime" Type="int" />
+          <Property Name="SpaceId" Type="int" />
+          <Property Name="EmailCC" Type="varchar" MaxLength="50" />
+          <Property Name="AssignedToId" Type="int" />
+          <Property Name="RequestorLastName" Type="varchar" MaxLength="50" />
+          <Property Name="RequestorFirstName" Type="varchar" MaxLength="50" />
+          <Property Name="RequestorName" Type="varchar" MaxLength="50" />
+          <Property Name="RequestorPhone" Type="varchar" MaxLength="50" />
+          <Property Name="RequestorEmail" Type="varchar" MaxLength="50" />
+          <Property Name="RequestorFax" Type="varchar" MaxLength="50" />
+          <Property Name="RequestorCompanyName" Type="varchar" MaxLength="50" />
+          <Property Name="RequestorId" Type="int" />
+          <Property Name="CreatedByFirstName" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedByLastName" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedByPhone" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedByEmail" Type="varchar" MaxLength="50" />
+          <Property Name="BillableFlag" Type="bit" />
+          <Property Name="BillingStatusFlag" Type="bit" />
+          <Property Name="TotalLaborCost" Type="int" />
+          <Property Name="TotalMaterialCost" Type="int" />
+          <Property Name="TotalMarkupint" Type="int" />
+          <Property Name="BillCodeId" Type="int" />
+          <Property Name="EstimatedLaborHours" Type="int" />
+          <Property Name="EstimatedTotalAmount" Type="int" />
+          <Property Name="TotalLaborHours" Type="int" />
+          <Property Name="AttachedFileName" Type="varchar" MaxLength="100" />
+          <Property Name="ProjectId" Type="int" />
+          <Property Name="CreateByDatePropertyTime" Type="datetime" />
+          <Property Name="GeneralComments" Type="varchar" MaxLength="100" />
+          <Property Name="NotifyRequestorFlag" Type="bit" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="RequestSubTypeId" Type="int" />
+          <Property Name="AuthentryFlag" Type="bit" />
+          <Property Name="AuthentryRemarks" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerPONumber" Type="varchar" MaxLength="50" />
+          <Property Name="ExternalPOLineNumber" Type="varchar" MaxLength="50" />
+          <Property Name="CostCodeId" Type="int" />
+          <Property Name="EscalateToId" Type="int" />
+          <Property Name="NotToExceedAmount" Type="int" />
+          <Property Name="TotalOtherCost" Type="int" />
+          <Property Name="AssetId" Type="int" />
+          <Property Name="FailureCodeId" Type="int" />
+          <Property Name="PropertyExternalId" Type="varchar" MaxLength="50" />
+          <Property Name="TotalTax" Type="int" />
+          <Property Name="BudgetYear" Type="int" />
+          <Property Name="WorkTypeId" Type="int" />
+          <Property Name="PropertyId" Type="int" />
+        </EntityType>
+        <EntityContainer Name="GuardianStagingModelStoreContainer">
+          <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivityGroups" EntityType="Self.ActivityGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationUsers" EntityType="Self.ApplicationUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BillCodes" EntityType="Self.BillCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuardianVM" EntityType="Self.GuardianVM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LaborCosts" EntityType="Self.LaborCosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LaborRateScheduleBillingRates" EntityType="Self.LaborRateScheduleBillingRates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LaborRateSchedules" EntityType="Self.LaborRateSchedules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtherCosts" EntityType="Self.OtherCosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PriorityTypeSlaDetails" EntityType="Self.PriorityTypeSlaDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegionRegionAssociations" EntityType="Self.RegionRegionAssociations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceTypes" EntityType="Self.ServiceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spaces" EntityType="Self.Spaces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserApiModels" EntityType="Self.UserApiModels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkOrderChargeToAccounts" EntityType="Self.WorkOrderChargeToAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkOrderMaterialCostLineItems" EntityType="Self.WorkOrderMaterialCostLineItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workorders" EntityType="Self.Workorders" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GuardianStagingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActivityGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultFlag" Type="Boolean" />
+          <Property Name="DataExtractFlag" Type="Boolean" />
+          <Property Name="UpdatedById" Type="Int64" />
+          <Property Name="UpdatedByExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ApplicationUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Assets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="AssetNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AssetClass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyId" Type="Int64" />
+          <Property Name="MakeId" Type="Int64" />
+          <Property Name="ModelId" Type="Int64" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RequestId" Type="Int64" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedById" Type="Int64" />
+          <Property Name="UpdatedByExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AttachmentTypeId" Type="Int64" />
+          <Property Name="RequestExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contents" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsSignature" Type="Boolean" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BillCodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedById" Type="Int64" />
+          <Property Name="UpdatedByExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BillTypeId" Type="Int64" Nullable="false" />
+          <Property Name="GlIncomeAccount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Region" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="GuardianVM">
+          <Key>
+            <PropertyRef Name="EntityID" />
+          </Key>
+          <Property Name="EntityID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="7" />
+          <Property Name="InvoiceNo" Type="Int64" Nullable="false" />
+          <Property Name="InvoiceBallance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Custumer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Property" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AECode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LaborCosts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int64" />
+          <Property Name="ExternalEmployeeId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TimeStarted" Type="DateTime" Precision="3" />
+          <Property Name="TimeFinished" Type="DateTime" Precision="3" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="Hours" Type="Int32" />
+          <Property Name="RateTypeId" Type="Int64" />
+          <Property Name="RequestTypeActivityId" Type="Int64" />
+          <Property Name="ExternalRequestTypeActivityId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ApInvoiceNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ApAccountNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LienWaiverAmount" Type="Int32" />
+          <Property Name="LienWaiverComments" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentComments" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ApInvoiceAmount" Type="Int32" />
+          <Property Name="ApPostDate" Type="DateTime" Precision="3" />
+          <Property Name="ApDueDate" Type="DateTime" Precision="3" />
+          <Property Name="ApTaxAmount" Type="Int32" />
+          <Property Name="ApShippingHandlingAmount" Type="Int32" />
+          <Property Name="ApInvoiceStatusId" Type="Int64" />
+          <Property Name="ApInvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="CoaAccountId" Type="Int64" />
+          <Property Name="Payee" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TaxAmount" Type="Int32" />
+          <Property Name="BudgetYear" Type="Int32" />
+          <Property Name="VendorCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VendorCompanyExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CrewId" Type="Int64" />
+          <Property Name="InstallId" Type="Int64" />
+          <Property Name="RequestId" Type="Int64" />
+          <Property Name="RequestExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="VendorCompanyId" Type="Int64" />
+          <Property Name="TotalAmount" Type="Int32" />
+          <Property Name="MarkupFlag" Type="Boolean" />
+          <Property Name="TotalMarkup" Type="Int32" />
+          <Property Name="AccountId" Type="Int64" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="RecurrenceId" Type="Int64" />
+          <Property Name="UpdatedById" Type="Int64" />
+          <Property Name="AccountsPayableFlag" Type="Boolean" />
+          <Property Name="ApExportFlag" Type="Boolean" />
+          <Property Name="TaxableFlag" Type="Boolean" />
+          <Property Name="CurrencySign" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LineItemNumber" Type="Int32" />
+          <Property Name="ExternalId" Type="Int64" />
+          <Property Name="TaxRate" Type="Int32" />
+          <Property Name="ExternalUpdatedById" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ExternalRecurrenceId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="LaborRateScheduleBillingRates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="RateScheduleId" Type="Int64" />
+          <Property Name="RequestTypeActivityId" Type="Int64" />
+          <Property Name="EmployeeId" Type="Int64" />
+          <Property Name="HourlyRate" Type="Int32" />
+          <Property Name="OtHourlyRate" Type="Int32" />
+          <Property Name="TwoOtHourlyRate" Type="Int32" />
+          <Property Name="PositionId" Type="Int64" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="LaborRateSchedules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="RateDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TabOrder" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OtherCosts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="OtherCostTypeId" Type="Int64" />
+          <Property Name="OtherCostType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PriorityTypeSlaDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="RequestPriorityId" Type="Int64" />
+          <Property Name="RequestTypeId" Type="Int64" />
+          <Property Name="DefaultFollowupAlert" Type="Int32" />
+          <Property Name="EscalateToId" Type="Int64" />
+          <Property Name="DefaultSlaResponseTime" Type="Int32" />
+          <Property Name="DefaultSlaCompletionTime" Type="Int32" />
+          <Property Name="SlaOverdueAlert" Type="Int32" />
+          <Property Name="SlaEscalateToId" Type="Int64" />
+          <Property Name="SlaSendNotificationsFlag" Type="Boolean" />
+          <Property Name="UpdatedById" Type="Int64" />
+          <Property Name="Sla247OverrideFlag" Type="Boolean" />
+          <Property Name="RequestSubTypeId" Type="Int64" />
+          <Property Name="DefaultPriorityFlag" Type="Boolean" />
+          <Property Name="SlaCompletionInHours" Type="Boolean" />
+          <Property Name="SlaResponseInHours" Type="Boolean" />
+          <Property Name="UpdatedByExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Properties">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyId" Type="Int64" />
+          <Property Name="ParentId" Type="Int64" />
+          <Property Name="Region" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultContact" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultServiceContract" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ExternalPropertyId" Type="Int64" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="RegionRegionAssociations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="ParentId" Type="Int64" />
+          <Property Name="ParentExternalId" Type="Int64" />
+          <Property Name="ChildId" Type="Int64" />
+          <Property Name="ChildExternalId" Type="Int64" />
+          <Property Name="UpdatedById" Type="Int64" />
+          <Property Name="UpdatedByExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyId" Type="Int64" />
+          <Property Name="ParentId" Type="Int64" />
+          <Property Name="ParentFlag" Type="Boolean" />
+          <Property Name="Sqft" Type="Int32" />
+          <Property Name="ExternalId" Type="Int64" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyExternalId" Type="Int64" />
+          <Property Name="ParentExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Schedules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="ExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="AssetId" Type="Int64" />
+          <Property Name="PropertyId" Type="Int64" />
+          <Property Name="RequestTypeId" Type="Int64" />
+          <Property Name="RequestSubTypeId" Type="Int64" />
+          <Property Name="ScheduleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RecurrencePatternDesc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AssignedToId" Type="Int64" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ServiceTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Spaces">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RateScheduleId" Type="Int64" />
+          <Property Name="PropertyId" Type="Int64" />
+          <Property Name="ExternalFloorId" Type="Int64" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="PropertyExternalId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserApiModels">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="access_token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="token_type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="expires_in" Type="Int32" Nullable="false" />
+          <Property Name="refresh_token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="first_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="last_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="installation_id" Type="Int32" Nullable="false" />
+          <Property Name="installation_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="CompanyId" Type="Int64" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="WorkOrderMaterialCostLineItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="RequestedId" Type="Int64" />
+          <Property Name="ItemName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ChargeToAccountNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ChargetoAccount" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="UnitCost" Type="Int32" />
+          <Property Name="TotalCost" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="GuardianStagingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
+          <EntitySet Name="ActivityGroups" EntityType="Self.ActivityGroups" />
+          <EntitySet Name="ApplicationUsers" EntityType="Self.ApplicationUsers" />
+          <EntitySet Name="Assets" EntityType="Self.Assets" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachments" />
+          <EntitySet Name="BillCodes" EntityType="Self.BillCodes" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" />
+          <EntitySet Name="GuardianVM" EntityType="Self.GuardianVM" />
+          <EntitySet Name="LaborCosts" EntityType="Self.LaborCosts" />
+          <EntitySet Name="LaborRateScheduleBillingRates" EntityType="Self.LaborRateScheduleBillingRates" />
+          <EntitySet Name="LaborRateSchedules" EntityType="Self.LaborRateSchedules" />
+          <EntitySet Name="OtherCosts" EntityType="Self.OtherCosts" />
+          <EntitySet Name="PriorityTypeSlaDetails" EntityType="Self.PriorityTypeSlaDetails" />
+          <EntitySet Name="Properties" EntityType="Self.Properties" />
+          <EntitySet Name="RegionRegionAssociations" EntityType="Self.RegionRegionAssociations" />
+          <EntitySet Name="Regions" EntityType="Self.Regions" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedules" />
+          <EntitySet Name="ServiceTypes" EntityType="Self.ServiceTypes" />
+          <EntitySet Name="Spaces" EntityType="Self.Spaces" />
+          <EntitySet Name="UserApiModels" EntityType="Self.UserApiModels" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="WorkOrderMaterialCostLineItems" EntityType="Self.WorkOrderMaterialCostLineItems" />
+          <EntitySet Name="Workorders" EntityType="GuardianStagingModel.Workorders" />
+          <EntitySet Name="WorkOrderChargeToAccounts" EntityType="GuardianStagingModel.WorkOrderChargeToAccounts" />
+        </EntityContainer>
+        <EntityType Name="Workorders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="ExternalId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RequestTypeId" Type="Int32" />
+          <Property Name="RequestPriorityId" Type="Int32" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="StatementOfWork" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="AssignedDate" Type="DateTime" Precision="3" />
+          <Property Name="ClosedDate" Type="DateTime" Precision="3" />
+          <Property Name="ClosedById" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedById" Type="Int32" />
+          <Property Name="ActualCompletionDate" Type="DateTime" Precision="3" />
+          <Property Name="SlaActualResponseDate" Type="DateTime" Precision="3" />
+          <Property Name="SlaActualCompletionDate" Type="DateTime" Precision="3" />
+          <Property Name="PropertyHoursInDay" Type="Int32" />
+          <Property Name="ActualCompletionTime" Type="Int32" />
+          <Property Name="ActualResponseTime" Type="Int32" />
+          <Property Name="SpaceId" Type="Int32" />
+          <Property Name="EmailCC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AssignedToId" Type="Int32" />
+          <Property Name="RequestorLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestorFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestorPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestorEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestorFax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestorCompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestorId" Type="Int32" />
+          <Property Name="CreatedByFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedByLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedByPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedByEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BillableFlag" Type="Boolean" />
+          <Property Name="BillingStatusFlag" Type="Boolean" />
+          <Property Name="TotalLaborCost" Type="Int32" />
+          <Property Name="TotalMaterialCost" Type="Int32" />
+          <Property Name="TotalMarkupint" Type="Int32" />
+          <Property Name="BillCodeId" Type="Int32" />
+          <Property Name="EstimatedLaborHours" Type="Int32" />
+          <Property Name="EstimatedTotalAmount" Type="Int32" />
+          <Property Name="TotalLaborHours" Type="Int32" />
+          <Property Name="AttachedFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectId" Type="Int32" />
+          <Property Name="CreateByDatePropertyTime" Type="DateTime" Precision="3" />
+          <Property Name="GeneralComments" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NotifyRequestorFlag" Type="Boolean" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="RequestSubTypeId" Type="Int32" />
+          <Property Name="AuthentryFlag" Type="Boolean" />
+          <Property Name="AuthentryRemarks" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerPONumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExternalPOLineNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CostCodeId" Type="Int32" />
+          <Property Name="EscalateToId" Type="Int32" />
+          <Property Name="NotToExceedAmount" Type="Int32" />
+          <Property Name="TotalOtherCost" Type="Int32" />
+          <Property Name="AssetId" Type="Int32" />
+          <Property Name="FailureCodeId" Type="Int32" />
+          <Property Name="PropertyExternalId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalTax" Type="Int32" />
+          <Property Name="BudgetYear" Type="Int32" />
+          <Property Name="WorkTypeId" Type="Int32" />
+          <Property Name="PropertyId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WorkOrderChargeToAccounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="RequestId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestExternalId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Number" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsDefault" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GuardianStagingModelStoreContainer" CdmEntityContainer="GuardianStagingEntities">
+          <EntitySetMapping Name="C__EFMigrationsHistory">
+            <EntityTypeMapping TypeName="GuardianStagingModel.C__EFMigrationsHistory">
+              <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityGroups">
+            <EntityTypeMapping TypeName="GuardianStagingModel.ActivityGroups">
+              <MappingFragment StoreEntitySet="ActivityGroups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DefaultFlag" ColumnName="DefaultFlag" />
+                <ScalarProperty Name="DataExtractFlag" ColumnName="DataExtractFlag" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="UpdatedByExternalId" ColumnName="UpdatedByExternalId" />
+                <ScalarProperty Name="ExternalId" ColumnName="ExternalId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationUsers">
+            <EntityTypeMapping TypeName="GuardianStagingModel.ApplicationUsers">
+              <MappingFragment StoreEntitySet="ApplicationUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Assets">
+            <EntityTypeMapping TypeName="GuardianStagingModel.Assets">
+              <MappingFragment StoreEntitySet="Assets">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AssetNumber" ColumnName="AssetNumber" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="AssetClass" ColumnName="AssetClass" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="MakeId" ColumnName="MakeId" />
+                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="GuardianStagingModel.Attachments">
+              <MappingFragment StoreEntitySet="Attachments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="UpdatedByExternalId" ColumnName="UpdatedByExternalId" />
+                <ScalarProperty Name="AttachmentTypeId" ColumnName="AttachmentTypeId" />
+                <ScalarProperty Name="RequestExternalId" ColumnName="RequestExternalId" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="IsSignature" ColumnName="IsSignature" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillCodes">
+            <EntityTypeMapping TypeName="GuardianStagingModel.BillCodes">
+              <MappingFragment StoreEntitySet="BillCodes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="UpdatedByExternalId" ColumnName="UpdatedByExternalId" />
+                <ScalarProperty Name="BillTypeId" ColumnName="BillTypeId" />
+                <ScalarProperty Name="GlIncomeAccount" ColumnName="GlIncomeAccount" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="GuardianStagingModel.Companies">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuardianVM">
+            <EntityTypeMapping TypeName="GuardianStagingModel.GuardianVM">
+              <MappingFragment StoreEntitySet="GuardianVM">
+                <ScalarProperty Name="EntityID" ColumnName="EntityID" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="InvoiceBallance" ColumnName="InvoiceBallance" />
+                <ScalarProperty Name="Custumer" ColumnName="Custumer" />
+                <ScalarProperty Name="Property" ColumnName="Property" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AECode" ColumnName="AECode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LaborCosts">
+            <EntityTypeMapping TypeName="GuardianStagingModel.LaborCosts">
+              <MappingFragment StoreEntitySet="LaborCosts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ExternalEmployeeId" ColumnName="ExternalEmployeeId" />
+                <ScalarProperty Name="TimeStarted" ColumnName="TimeStarted" />
+                <ScalarProperty Name="TimeFinished" ColumnName="TimeFinished" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="RateTypeId" ColumnName="RateTypeId" />
+                <ScalarProperty Name="RequestTypeActivityId" ColumnName="RequestTypeActivityId" />
+                <ScalarProperty Name="ExternalRequestTypeActivityId" ColumnName="ExternalRequestTypeActivityId" />
+                <ScalarProperty Name="ApInvoiceNumber" ColumnName="ApInvoiceNumber" />
+                <ScalarProperty Name="ApAccountNumber" ColumnName="ApAccountNumber" />
+                <ScalarProperty Name="LienWaiverAmount" ColumnName="LienWaiverAmount" />
+                <ScalarProperty Name="LienWaiverComments" ColumnName="LienWaiverComments" />
+                <ScalarProperty Name="PaymentComments" ColumnName="PaymentComments" />
+                <ScalarProperty Name="ApInvoiceAmount" ColumnName="ApInvoiceAmount" />
+                <ScalarProperty Name="ApPostDate" ColumnName="ApPostDate" />
+                <ScalarProperty Name="ApDueDate" ColumnName="ApDueDate" />
+                <ScalarProperty Name="ApTaxAmount" ColumnName="ApTaxAmount" />
+                <ScalarProperty Name="ApShippingHandlingAmount" ColumnName="ApShippingHandlingAmount" />
+                <ScalarProperty Name="ApInvoiceStatusId" ColumnName="ApInvoiceStatusId" />
+                <ScalarProperty Name="ApInvoiceDate" ColumnName="ApInvoiceDate" />
+                <ScalarProperty Name="CoaAccountId" ColumnName="CoaAccountId" />
+                <ScalarProperty Name="Payee" ColumnName="Payee" />
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="BudgetYear" ColumnName="BudgetYear" />
+                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
+                <ScalarProperty Name="VendorCompanyExternalId" ColumnName="VendorCompanyExternalId" />
+                <ScalarProperty Name="CrewId" ColumnName="CrewId" />
+                <ScalarProperty Name="InstallId" ColumnName="InstallId" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestExternalId" ColumnName="RequestExternalId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="VendorCompanyId" ColumnName="VendorCompanyId" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="MarkupFlag" ColumnName="MarkupFlag" />
+                <ScalarProperty Name="TotalMarkup" ColumnName="TotalMarkup" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="RecurrenceId" ColumnName="RecurrenceId" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="AccountsPayableFlag" ColumnName="AccountsPayableFlag" />
+                <ScalarProperty Name="ApExportFlag" ColumnName="ApExportFlag" />
+                <ScalarProperty Name="TaxableFlag" ColumnName="TaxableFlag" />
+                <ScalarProperty Name="CurrencySign" ColumnName="CurrencySign" />
+                <ScalarProperty Name="LineItemNumber" ColumnName="LineItemNumber" />
+                <ScalarProperty Name="ExternalId" ColumnName="ExternalId" />
+                <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
+                <ScalarProperty Name="ExternalUpdatedById" ColumnName="ExternalUpdatedById" />
+                <ScalarProperty Name="ExternalRecurrenceId" ColumnName="ExternalRecurrenceId" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LaborRateScheduleBillingRates">
+            <EntityTypeMapping TypeName="GuardianStagingModel.LaborRateScheduleBillingRates">
+              <MappingFragment StoreEntitySet="LaborRateScheduleBillingRates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RateScheduleId" ColumnName="RateScheduleId" />
+                <ScalarProperty Name="RequestTypeActivityId" ColumnName="RequestTypeActivityId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="HourlyRate" ColumnName="HourlyRate" />
+                <ScalarProperty Name="OtHourlyRate" ColumnName="OtHourlyRate" />
+                <ScalarProperty Name="TwoOtHourlyRate" ColumnName="TwoOtHourlyRate" />
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LaborRateSchedules">
+            <EntityTypeMapping TypeName="GuardianStagingModel.LaborRateSchedules">
+              <MappingFragment StoreEntitySet="LaborRateSchedules">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RateDescription" ColumnName="RateDescription" />
+                <ScalarProperty Name="TabOrder" ColumnName="TabOrder" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtherCosts">
+            <EntityTypeMapping TypeName="GuardianStagingModel.OtherCosts">
+              <MappingFragment StoreEntitySet="OtherCosts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OtherCostTypeId" ColumnName="OtherCostTypeId" />
+                <ScalarProperty Name="OtherCostType" ColumnName="OtherCostType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriorityTypeSlaDetails">
+            <EntityTypeMapping TypeName="GuardianStagingModel.PriorityTypeSlaDetails">
+              <MappingFragment StoreEntitySet="PriorityTypeSlaDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RequestPriorityId" ColumnName="RequestPriorityId" />
+                <ScalarProperty Name="RequestTypeId" ColumnName="RequestTypeId" />
+                <ScalarProperty Name="DefaultFollowupAlert" ColumnName="DefaultFollowupAlert" />
+                <ScalarProperty Name="EscalateToId" ColumnName="EscalateToId" />
+                <ScalarProperty Name="DefaultSlaResponseTime" ColumnName="DefaultSlaResponseTime" />
+                <ScalarProperty Name="DefaultSlaCompletionTime" ColumnName="DefaultSlaCompletionTime" />
+                <ScalarProperty Name="SlaOverdueAlert" ColumnName="SlaOverdueAlert" />
+                <ScalarProperty Name="SlaEscalateToId" ColumnName="SlaEscalateToId" />
+                <ScalarProperty Name="SlaSendNotificationsFlag" ColumnName="SlaSendNotificationsFlag" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="Sla247OverrideFlag" ColumnName="Sla247OverrideFlag" />
+                <ScalarProperty Name="RequestSubTypeId" ColumnName="RequestSubTypeId" />
+                <ScalarProperty Name="DefaultPriorityFlag" ColumnName="DefaultPriorityFlag" />
+                <ScalarProperty Name="SlaCompletionInHours" ColumnName="SlaCompletionInHours" />
+                <ScalarProperty Name="SlaResponseInHours" ColumnName="SlaResponseInHours" />
+                <ScalarProperty Name="UpdatedByExternalId" ColumnName="UpdatedByExternalId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="GuardianStagingModel.Properties">
+              <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="DefaultContact" ColumnName="DefaultContact" />
+                <ScalarProperty Name="DefaultServiceContract" ColumnName="DefaultServiceContract" />
+                <ScalarProperty Name="ExternalPropertyId" ColumnName="ExternalPropertyId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegionRegionAssociations">
+            <EntityTypeMapping TypeName="GuardianStagingModel.RegionRegionAssociations">
+              <MappingFragment StoreEntitySet="RegionRegionAssociations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ParentExternalId" ColumnName="ParentExternalId" />
+                <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+                <ScalarProperty Name="ChildExternalId" ColumnName="ChildExternalId" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="UpdatedByExternalId" ColumnName="UpdatedByExternalId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="GuardianStagingModel.Regions">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ParentFlag" ColumnName="ParentFlag" />
+                <ScalarProperty Name="Sqft" ColumnName="Sqft" />
+                <ScalarProperty Name="ExternalId" ColumnName="ExternalId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CompanyExternalId" ColumnName="CompanyExternalId" />
+                <ScalarProperty Name="ParentExternalId" ColumnName="ParentExternalId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="GuardianStagingModel.Schedules">
+              <MappingFragment StoreEntitySet="Schedules">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ExternalId" ColumnName="ExternalId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="RequestTypeId" ColumnName="RequestTypeId" />
+                <ScalarProperty Name="RequestSubTypeId" ColumnName="RequestSubTypeId" />
+                <ScalarProperty Name="ScheduleName" ColumnName="ScheduleName" />
+                <ScalarProperty Name="RecurrencePatternDesc" ColumnName="RecurrencePatternDesc" />
+                <ScalarProperty Name="AssignedToId" ColumnName="AssignedToId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceTypes">
+            <EntityTypeMapping TypeName="GuardianStagingModel.ServiceTypes">
+              <MappingFragment StoreEntitySet="ServiceTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spaces">
+            <EntityTypeMapping TypeName="GuardianStagingModel.Spaces">
+              <MappingFragment StoreEntitySet="Spaces">
+                <ScalarProperty Name="PropertyExternalId" ColumnName="PropertyExternalId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RateScheduleId" ColumnName="RateScheduleId" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="ExternalFloorId" ColumnName="ExternalFloorId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserApiModels">
+            <EntityTypeMapping TypeName="GuardianStagingModel.UserApiModels">
+              <MappingFragment StoreEntitySet="UserApiModels">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="access_token" ColumnName="access_token" />
+                <ScalarProperty Name="token_type" ColumnName="token_type" />
+                <ScalarProperty Name="expires_in" ColumnName="expires_in" />
+                <ScalarProperty Name="refresh_token" ColumnName="refresh_token" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="installation_id" ColumnName="installation_id" />
+                <ScalarProperty Name="installation_name" ColumnName="installation_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GuardianStagingModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkOrderMaterialCostLineItems">
+            <EntityTypeMapping TypeName="GuardianStagingModel.WorkOrderMaterialCostLineItems">
+              <MappingFragment StoreEntitySet="WorkOrderMaterialCostLineItems">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RequestedId" ColumnName="RequestedId" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ChargeToAccountNumber" ColumnName="ChargeToAccountNumber" />
+                <ScalarProperty Name="ChargetoAccount" ColumnName="ChargetoAccount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workorders">
+            <EntityTypeMapping TypeName="GuardianStagingModel.Workorders">
+              <MappingFragment StoreEntitySet="Workorders">
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="WorkTypeId" ColumnName="WorkTypeId" />
+                <ScalarProperty Name="BudgetYear" ColumnName="BudgetYear" />
+                <ScalarProperty Name="TotalTax" ColumnName="TotalTax" />
+                <ScalarProperty Name="PropertyExternalId" ColumnName="PropertyExternalId" />
+                <ScalarProperty Name="FailureCodeId" ColumnName="FailureCodeId" />
+                <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+                <ScalarProperty Name="TotalOtherCost" ColumnName="TotalOtherCost" />
+                <ScalarProperty Name="NotToExceedAmount" ColumnName="NotToExceedAmount" />
+                <ScalarProperty Name="EscalateToId" ColumnName="EscalateToId" />
+                <ScalarProperty Name="CostCodeId" ColumnName="CostCodeId" />
+                <ScalarProperty Name="ExternalPOLineNumber" ColumnName="ExternalPOLineNumber" />
+                <ScalarProperty Name="CustomerPONumber" ColumnName="CustomerPONumber" />
+                <ScalarProperty Name="AuthentryRemarks" ColumnName="AuthentryRemarks" />
+                <ScalarProperty Name="AuthentryFlag" ColumnName="AuthentryFlag" />
+                <ScalarProperty Name="RequestSubTypeId" ColumnName="RequestSubTypeId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="NotifyRequestorFlag" ColumnName="NotifyRequestorFlag" />
+                <ScalarProperty Name="GeneralComments" ColumnName="GeneralComments" />
+                <ScalarProperty Name="CreateByDatePropertyTime" ColumnName="CreateByDatePropertyTime" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="AttachedFileName" ColumnName="AttachedFileName" />
+                <ScalarProperty Name="TotalLaborHours" ColumnName="TotalLaborHours" />
+                <ScalarProperty Name="EstimatedTotalAmount" ColumnName="EstimatedTotalAmount" />
+                <ScalarProperty Name="EstimatedLaborHours" ColumnName="EstimatedLaborHours" />
+                <ScalarProperty Name="BillCodeId" ColumnName="BillCodeId" />
+                <ScalarProperty Name="TotalMarkupint" ColumnName="TotalMarkupint" />
+                <ScalarProperty Name="TotalMaterialCost" ColumnName="TotalMaterialCost" />
+                <ScalarProperty Name="TotalLaborCost" ColumnName="TotalLaborCost" />
+                <ScalarProperty Name="BillingStatusFlag" ColumnName="BillingStatusFlag" />
+                <ScalarProperty Name="BillableFlag" ColumnName="BillableFlag" />
+                <ScalarProperty Name="CreatedByEmail" ColumnName="CreatedByEmail" />
+                <ScalarProperty Name="CreatedByPhone" ColumnName="CreatedByPhone" />
+                <ScalarProperty Name="CreatedByLastName" ColumnName="CreatedByLastName" />
+                <ScalarProperty Name="CreatedByFirstName" ColumnName="CreatedByFirstName" />
+                <ScalarProperty Name="RequestorId" ColumnName="RequestorId" />
+                <ScalarProperty Name="RequestorCompanyName" ColumnName="RequestorCompanyName" />
+                <ScalarProperty Name="RequestorFax" ColumnName="RequestorFax" />
+                <ScalarProperty Name="RequestorEmail" ColumnName="RequestorEmail" />
+                <ScalarProperty Name="RequestorPhone" ColumnName="RequestorPhone" />
+                <ScalarProperty Name="RequestorName" ColumnName="RequestorName" />
+                <ScalarProperty Name="RequestorFirstName" ColumnName="RequestorFirstName" />
+                <ScalarProperty Name="RequestorLastName" ColumnName="RequestorLastName" />
+                <ScalarProperty Name="AssignedToId" ColumnName="AssignedToId" />
+                <ScalarProperty Name="EmailCC" ColumnName="EmailCC" />
+                <ScalarProperty Name="SpaceId" ColumnName="SpaceId" />
+                <ScalarProperty Name="ActualResponseTime" ColumnName="ActualResponseTime" />
+                <ScalarProperty Name="ActualCompletionTime" ColumnName="ActualCompletionTime" />
+                <ScalarProperty Name="PropertyHoursInDay" ColumnName="PropertyHoursInDay" />
+                <ScalarProperty Name="SlaActualCompletionDate" ColumnName="SlaActualCompletionDate" />
+                <ScalarProperty Name="SlaActualResponseDate" ColumnName="SlaActualResponseDate" />
+                <ScalarProperty Name="ActualCompletionDate" ColumnName="ActualCompletionDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ClosedById" ColumnName="ClosedById" />
+                <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+                <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
+                <ScalarProperty Name="StatementOfWork" ColumnName="StatementOfWork" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="RequestPriorityId" ColumnName="RequestPriorityId" />
+                <ScalarProperty Name="RequestTypeId" ColumnName="RequestTypeId" />
+                <ScalarProperty Name="ExternalId" ColumnName="ExternalId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkOrderChargeToAccounts">
+            <EntityTypeMapping TypeName="GuardianStagingModel.WorkOrderChargeToAccounts">
+              <MappingFragment StoreEntitySet="WorkOrderChargeToAccounts">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RequestExternalId" ColumnName="RequestExternalId" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
